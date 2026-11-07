@@ -1,0 +1,27 @@
+using UnityEngine;
+
+namespace LuckyMaths.Scripts.Manager
+{
+    public class ScoreManager : MonoBehaviour
+    {
+        #region Variables
+
+        #endregion
+        #region Unity Messages
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+        #endregion
+        #region Methods
+
+        #endregion
+    }
+}
