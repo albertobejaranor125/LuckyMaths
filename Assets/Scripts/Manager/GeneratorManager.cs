@@ -22,7 +22,6 @@ namespace LuckyMaths.Scripts.Manager
         private List<int> _solutionNumbers;
         #endregion
         #region Unity Messages
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _operationGenerator = FindAnyObjectByType<OperationGenerator>();
@@ -85,10 +84,6 @@ namespace LuckyMaths.Scripts.Manager
         {
             return new List<int>(_availableNumbers);
         }
-        /*public bool ValidatePlayerOperation(string operation)
-        {
-            return _solutionValidator.ValidateOperation(_luckyNumberGenerated, operation);
-        }*/
         public bool ValidatePlayerOperation(int[] numbers)
         {
             if(numbers == null || numbers.Length != 3)

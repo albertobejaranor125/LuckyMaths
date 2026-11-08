@@ -25,7 +25,6 @@ namespace LuckyMaths.Scripts.Display
         [SerializeField] private TextMeshProUGUI _secondOperator;
         #endregion
         #region Unity Messages
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _generatorManager = FindAnyObjectByType<GeneratorManager>();
@@ -137,6 +136,16 @@ namespace LuckyMaths.Scripts.Display
                     Debug.LogError("Unknown operation type\n");
                     break;
             }
+        }
+        public void SetSelectedNumbersColor(Color color)
+        {
+            _firstNumberSlot.color = color;
+            _secondNumberSlot.color = color;
+            _thirdNumberSlot.color = color;
+        }
+        public void ResetSelectedNumbersColor()
+        {
+            SetSelectedNumbersColor(Color.white);
         }
         #endregion
     }

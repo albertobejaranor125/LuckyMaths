@@ -25,6 +25,8 @@ namespace LuckyMaths.Scripts.Manager
         {
             _comboMultiplier = 1;
             Score = 0;
+            _scoreText.fontStyle = (FontStyles) FontStyle.BoldAndItalic;
+            _scoreText.fontSize = 54;
             _scoreText.text = "Score: " + Score;
         }
         #endregion
@@ -34,6 +36,8 @@ namespace LuckyMaths.Scripts.Manager
             if (amount <= 0) return;
             int finalAmount = amount * _comboMultiplier;
             Score += finalAmount;
+            _scoreText.fontStyle = (FontStyles)FontStyle.BoldAndItalic;
+            _scoreText.fontSize = 54;
             _scoreText.text = "Score: " + Score;
         }
         public void ResetCombo()

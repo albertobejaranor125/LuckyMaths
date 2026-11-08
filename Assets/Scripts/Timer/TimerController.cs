@@ -1,3 +1,4 @@
+using LuckyMaths.Scripts.Manager;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace LuckyMaths.Scripts.Timer
     public class TimerController : MonoBehaviour
     {
         #region Variables
-        [SerializeField] private float _timeRemaining = 60f;
+        [SerializeField] private float _timeRemaining = 90f;
         [SerializeField] private TextMeshProUGUI _timerText;
         public static TimerController Instance;
         public bool IsPlaying;
@@ -25,15 +26,14 @@ namespace LuckyMaths.Scripts.Timer
         void Update()
         {
             if (!IsPlaying) return;
-            if (_timeRemaining > 0)
-            {
-                _timeRemaining -= Time.deltaTime;
-            }
-            else if (_timeRemaining <= 0)
+            _timeRemaining -= Time.deltaTime;
+            if (_timeRemaining <= 0)
             {
                 _timeRemaining = 0;
                 IsPlaying = false;
+                GameManager.Instance.EndGame();
                 Debug.Log("Tiempo acabado");
+                return;
             }
             int minutes = Mathf.FloorToInt(_timeRemaining / 60);
             int seconds = Mathf.FloorToInt(_timeRemaining % 60);

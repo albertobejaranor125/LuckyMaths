@@ -149,9 +149,9 @@ namespace LuckyMaths.Scripts.Generator
                     {
                         continue;
                     }
-                    for (int k = 1; k < _luckyNumberRandom; k++)
+                    for (int k = 1; k <= 100; k++)
                     {
-                        if (k == i || k == j)
+                        if (k == i || k == j || k == _luckyNumberRandom)
                         {
                             continue;
                         }
@@ -223,24 +223,6 @@ namespace LuckyMaths.Scripts.Generator
                         _numbersSolutionGeneratedRandom.Add(j);
                         _numbersSolutionGeneratedRandom.Add(k);
                     }
-                    /*for (int k = 1; k < _luckyNumberRandom; k++)
-                    {
-                        if (k == i || k == j || k < 1 || k > 100 || k == _luckyNumberRandom)
-                        {
-                            continue;
-                        }
-                        if (_product / k == _luckyNumberRandom && _product % k == 0)
-                        {
-                            _validCombinations++;
-                            if (Random.Range(0, _validCombinations) == 0)
-                            {
-                                _numbersSolutionGeneratedRandom.Clear();
-                                _numbersSolutionGeneratedRandom.Add(i);
-                                _numbersSolutionGeneratedRandom.Add(j);
-                                _numbersSolutionGeneratedRandom.Add(k);
-                            }
-                        }
-                    }*/
                 }
             }
         }
