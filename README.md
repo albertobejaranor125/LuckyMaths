@@ -44,8 +44,8 @@ The WebGL build is available to play directly in your browser on itch.io:
 ## Third-Party Assets & Credits
 
 * **Music:** "Languages and Mathematics" by Naciux5 ([Languages and Mathematics Pixabay](https://pixabay.com/music/upbeat-languages-and-mathematics-363408/))
-* **Neon Like Font:** "Neon Like" by SnailFonts ([Neon Like Dafont]((https://www.dafont.com/es/neon-like.font?fpp=200)))
-* **BPneon Font:** "BPneon" by George Triantafyllakos ([BPneon Dafont]((https://www.dafont.com/es/bpneon.font?fpp=200)))
+* **Neon Like Font:** "Neon Like" by SnailFonts ([Neon Like Dafont](https://www.dafont.com/es/neon-like.font?fpp=200))
+* **BPneon Font:** "BPneon" by George Triantafyllakos ([BPneon Dafont](https://www.dafont.com/es/bpneon.font?fpp=200))
 
 ---
 
