@@ -10,6 +10,7 @@ namespace LuckyMaths.Scripts.Generator
         private List<int> _numbersSolutionGeneratedRandom;
         private List<int> _numbersDistractorGeneratedRandom;
         private int _luckyNumberRandom;
+        private int _validCombinations;
         #endregion
         #region Unity Messages
         void Awake()
@@ -42,29 +43,56 @@ namespace LuckyMaths.Scripts.Generator
         {
             return _luckyNumberRandom;
         }
-        public List<int> GenerateRandomNumbersSolution()
+        public List<int> GenerateRandomNumbersSolution(OperationType type)
         {
             _numbersSolutionGeneratedRandom.Clear();
-            int _validCombinations = 0;
-            for(int i = 1; i <= 100; i++)
+            switch (type)
             {
-                for(int j = i+1; j <= 100; j++)
+                case OperationType.MultiplyAdd:
+                    MultiplyAddGenerate();
+                    break;
+                case OperationType.AddMultiply:
+                    AddMultiplyGenerate();
+                    break;
+                case OperationType.MultiplySubtract:
+                    MultiplySubtractGenerate();
+                    break;
+                case OperationType.AddDivide:
+                    AddDivideGenerate();
+                    break;
+                case OperationType.MultiplyDivide:
+                    MultiplyDivideGenerate();
+                    break;
+                default:
+                    Debug.LogError("Unknown operation type\n");
+                    break;
+            }
+            Debug.Log("Valid combinations: " + _validCombinations);
+            Debug.Log("Selected combination: "+ string.Join(", ", _numbersSolutionGeneratedRandom));
+            return _numbersSolutionGeneratedRandom;
+        }
+        public void MultiplyAddGenerate()
+        {
+            _validCombinations = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                for (int j = i + 1; j <= 100; j++)
                 {
                     int _product = i * j;
-                    if(_product >= _luckyNumberRandom)
+                    if (_product >= _luckyNumberRandom)
                     {
                         continue;
                     }
-                    for(int k = 1; k < _luckyNumberRandom; k++)
+                    for (int k = 1; k < _luckyNumberRandom; k++)
                     {
-                        if(k == i || k == j)
+                        if (k == i || k == j)
                         {
                             continue;
                         }
-                        if(_product + k == _luckyNumberRandom)
+                        if (_product + k == _luckyNumberRandom)
                         {
                             _validCombinations++;
-                            if(Random.Range(0, _validCombinations) == 0)
+                            if (Random.Range(0, _validCombinations) == 0)
                             {
                                 _numbersSolutionGeneratedRandom.Clear();
                                 _numbersSolutionGeneratedRandom.Add(i);
@@ -75,9 +103,146 @@ namespace LuckyMaths.Scripts.Generator
                     }
                 }
             }
-            Debug.Log("Valid combinations: " + _validCombinations);
-            Debug.Log("Selected combination: "+string.Join(", ", _numbersSolutionGeneratedRandom));
-            return _numbersSolutionGeneratedRandom;
+        }
+        public void AddMultiplyGenerate()
+        {
+            _validCombinations = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                for (int j = i + 1; j <= 100; j++)
+                {
+                    int _sum = i + j;
+                    if (_sum > _luckyNumberRandom)
+                    {
+                        continue;
+                    }
+                    for (int k = 1; k < _luckyNumberRandom; k++)
+                    {
+                        if (k == i || k == j)
+                        {
+                            continue;
+                        }
+                        if (_sum * k == _luckyNumberRandom)
+                        {
+                            _validCombinations++;
+                            if (Random.Range(0, _validCombinations) == 0)
+                            {
+                                _numbersSolutionGeneratedRandom.Clear();
+                                _numbersSolutionGeneratedRandom.Add(i);
+                                _numbersSolutionGeneratedRandom.Add(j);
+                                _numbersSolutionGeneratedRandom.Add(k);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void MultiplySubtractGenerate()
+        {
+            _validCombinations = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                for (int j = i + 1; j <= 100; j++)
+                {
+                    int _product = i * j;
+                    if (_product <= _luckyNumberRandom)
+                    {
+                        continue;
+                    }
+                    for (int k = 1; k < _luckyNumberRandom; k++)
+                    {
+                        if (k == i || k == j)
+                        {
+                            continue;
+                        }
+                        if (_product - k == _luckyNumberRandom)
+                        {
+                            _validCombinations++;
+                            if (Random.Range(0, _validCombinations) == 0)
+                            {
+                                _numbersSolutionGeneratedRandom.Clear();
+                                _numbersSolutionGeneratedRandom.Add(i);
+                                _numbersSolutionGeneratedRandom.Add(j);
+                                _numbersSolutionGeneratedRandom.Add(k);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void AddDivideGenerate()
+        {
+            _validCombinations = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                for (int j = i + 1; j <= 100; j++)
+                {
+                    int _sum = i + j;
+                    if (_sum % _luckyNumberRandom != 0)
+                    {
+                        continue;
+                    }
+                    int k = _sum / _luckyNumberRandom;
+                    if (k == i || k == j || k < 1 || k > 100 || k == _luckyNumberRandom)
+                    {
+                        continue;
+                    }
+                    _validCombinations++;
+                    if (Random.Range(0, _validCombinations) == 0)
+                    {
+                        _numbersSolutionGeneratedRandom.Clear();
+                        _numbersSolutionGeneratedRandom.Add(i);
+                        _numbersSolutionGeneratedRandom.Add(j);
+                        _numbersSolutionGeneratedRandom.Add(k);
+                    }
+                }
+            }
+        }
+        public void MultiplyDivideGenerate()
+        {
+            _validCombinations = 0;
+            for (int i = 1; i <= 100; i++)
+            {
+                for (int j = i + 1; j <= 100; j++)
+                {
+                    int _product = i * j;
+                    if (_product % _luckyNumberRandom != 0)
+                    {
+                        continue;
+                    }
+                    int k = _product / _luckyNumberRandom;
+                    if (k == i || k == j || k < 1 || k > 100 || k == _luckyNumberRandom)
+                    {
+                        continue;
+                    }
+                    _validCombinations++;
+                    if (Random.Range(0, _validCombinations) == 0)
+                    {
+                        _numbersSolutionGeneratedRandom.Clear();
+                        _numbersSolutionGeneratedRandom.Add(i);
+                        _numbersSolutionGeneratedRandom.Add(j);
+                        _numbersSolutionGeneratedRandom.Add(k);
+                    }
+                    /*for (int k = 1; k < _luckyNumberRandom; k++)
+                    {
+                        if (k == i || k == j || k < 1 || k > 100 || k == _luckyNumberRandom)
+                        {
+                            continue;
+                        }
+                        if (_product / k == _luckyNumberRandom && _product % k == 0)
+                        {
+                            _validCombinations++;
+                            if (Random.Range(0, _validCombinations) == 0)
+                            {
+                                _numbersSolutionGeneratedRandom.Clear();
+                                _numbersSolutionGeneratedRandom.Add(i);
+                                _numbersSolutionGeneratedRandom.Add(j);
+                                _numbersSolutionGeneratedRandom.Add(k);
+                            }
+                        }
+                    }*/
+                }
+            }
         }
         public List<int> GenerateRandomDistractorNumbers()
         {

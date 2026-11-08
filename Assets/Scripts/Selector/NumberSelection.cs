@@ -33,8 +33,9 @@ namespace LuckyMaths.Scripts.Selector
             _currentSelection++;
             if(_currentSelection == 3)
             {
-                string _playerOperation = "(" + _selectedNumbers[0] + " * " + _selectedNumbers[1] + ") + " + _selectedNumbers[2];
-                bool _isCorrect = _generatorManager.ValidatePlayerOperation(_playerOperation);
+                /*string _playerOperation = "(" + _selectedNumbers[0] + " * " + _selectedNumbers[1] + ") + " + _selectedNumbers[2];
+                bool _isCorrect = _generatorManager.ValidatePlayerOperation(_playerOperation);*/
+                bool _isCorrect = _generatorManager.ValidatePlayerOperation(_selectedNumbers);
                 if (_isCorrect)
                 {
                     Debug.Log("Correct Operation!!\n");

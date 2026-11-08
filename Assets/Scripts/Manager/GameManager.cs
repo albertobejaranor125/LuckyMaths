@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace LuckyMaths.Scripts.Manager
 {
+    public enum GameState
+    {
+        Playing,
+        GameOver,
+        Ready
+    }
     public class GameManager : MonoBehaviour
     {
         #region Variables

@@ -1,3 +1,4 @@
+using LuckyMaths.Scripts.Generator;
 using LuckyMaths.Scripts.Manager;
 using System.Collections.Generic;
 using TMPro;
@@ -20,14 +21,18 @@ namespace LuckyMaths.Scripts.Display
         [SerializeField] private Button _button4;
         [SerializeField] private Button _button5;
         [SerializeField] private Button _button6;
+        [SerializeField] private TextMeshProUGUI _firstOperator;
+        [SerializeField] private TextMeshProUGUI _secondOperator;
         #endregion
         #region Unity Messages
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _generatorManager = FindAnyObjectByType<GeneratorManager>();
+            ClearNumberSlots();
             _targetNumber.text = _generatorManager.GetLuckyNumber().ToString();
             DisplayAvailableNumbers(_generatorManager.GetAvailableNumbers());
+            DisplayOperationType();
         }
         #endregion
         #region Methods
@@ -102,6 +107,36 @@ namespace LuckyMaths.Scripts.Display
         {
             _targetNumber.text = _generatorManager.GetLuckyNumber().ToString();
             DisplayAvailableNumbers(_generatorManager.GetAvailableNumbers());
+            DisplayOperationType();
+        }
+        private void DisplayOperationType()
+        {
+            switch (_generatorManager.GetCurrentOperationType())
+            {
+                case OperationType.MultiplyAdd:
+                    _firstOperator.text = "*";
+                    _secondOperator.text = "+";
+                    break;
+                case OperationType.AddMultiply:
+                    _firstOperator.text = "+";
+                    _secondOperator.text = "*";
+                    break;
+                case OperationType.MultiplySubtract:
+                    _firstOperator.text = "*";
+                    _secondOperator.text = "-";
+                    break;
+                case OperationType.AddDivide:
+                    _firstOperator.text = "+";
+                    _secondOperator.text = "/";
+                    break;
+                case OperationType.MultiplyDivide:
+                    _firstOperator.text = "*";
+                    _secondOperator.text = "/";
+                    break;
+                default:
+                    Debug.LogError("Unknown operation type\n");
+                    break;
+            }
         }
         #endregion
     }
